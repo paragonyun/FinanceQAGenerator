@@ -1,0 +1,2 @@
+# FinanceQAGenerator
+for individual project
