@@ -13,14 +13,7 @@ from src.get_pdf_info import get_pdf_texts
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
-texts = get_pdf_texts()
 
-print("상품 이해도를 확인하고자 하는 손님의 상품을 선택해주세요.")
-print(f"상품 리스트: {texts.keys()}")
-
-product = str(input())
-
-extracted_texts = str(texts[product])
 
 """
 ChatGPT에게 원하는 역할을 세부적으로 지정하여 
@@ -112,12 +105,16 @@ def get_result_json(QA_output):
 
 if __name__ == "__main__":
     texts = get_pdf_texts()                             # 상품설명서로부터 text 추출
-    extracted_texts = str(texts.values())               # 내용만 추출
+
+    print("상품 이해도를 확인하고자 하는 손님의 상품을 선택해주세요.")
+    print(f"상품 리스트: {texts.keys()}")
+
+    product = str(input())
+
+    extracted_texts = str(texts[product])               # 내용만 추출
     QA_result = get_qa(extracted_texts=extracted_texts, # 상품설명서 내용
                         age=30,                         # 사용자 연령
                         level='중수')                   # 사용자 금융 지식 수준
     get_result_json(QA_output=QA_result)                # 결과 저장
 
 
-
-## TODO: 짧은 PDF도 넣어서 테스트
